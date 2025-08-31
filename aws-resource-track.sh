@@ -1,5 +1,3 @@
-#!/bin/bash
-
 ########################################
 #  Author : Manoj
 #  Date : 30th Jul
@@ -14,19 +12,16 @@
 # Lambda
 # IAM 
 
+set -xeo pipefail
 
 # List Ec2 instances
-echo "Print EC2 Instance Details : "
-aws ec2 describe-instances
+aws ec2 describe-instances | jq '.Reservations[].Instances[].InstanceId' > resourcetracker
 
-# List S3 buckets
-echo "Print list of S3 Buckets : "
-aws s3 ls
+# List S3 
+aws s3 ls >> resourcetracker
 
 # List Lambda functions
-echo "Print List of Lambda Functions : "
-aws lambda list-functions
+aws lambda list-functions >> resourcetracker
 
 # List IAM Users
-echo "Print List of IAM Users : "
-aws iam list-users
+aws iam list-users >> resourcetracker
