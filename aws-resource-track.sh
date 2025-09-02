@@ -25,3 +25,5 @@ aws lambda list-functions >> resourcetracker
 
 # List IAM Users
 aws iam list-users >> resourcetracker
+
+cat resourcetracker
